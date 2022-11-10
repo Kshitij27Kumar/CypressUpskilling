@@ -1,0 +1,25 @@
+{
+    "login":{
+        "username":"#user-name",
+        "password":"#password",
+        "loginBtn":"#login-button"
+    },
+    "data":[
+        {
+            "loginUsername":"standard_user",
+            "loginPass":"secret_sauce"
+        },
+        {
+            "loginUsername":"problem_user",
+            "loginPass":"secret_sauce"
+        },
+        {
+            "loginUsername":"performance_glitch_user",
+            "loginPass":"secret_sauce"
+        }
+    ],
+    "logout":{
+        "menuBtn":"#react-burger-menu-btn",
+        "logoutBtn":"#logout_sidebar_link"
+    }
+}
