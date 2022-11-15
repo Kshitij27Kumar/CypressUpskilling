@@ -1,0 +1,18 @@
+{
+    "login":{
+        "username":"#user-name",
+        "password":"#password",
+        "loginBtn":"#login-button"
+    },
+    "logout":{
+        "menuBtn":"#react-burger-menu-btn",
+        "logoutBtn":"#logout_sidebar_link"
+    },
+    "productPage":{
+        "addToCartBtn":":nth-child(1) > .inventory_item_description > .pricebar > .btn",
+        "cartBtn":".shopping_cart_link"
+    },
+    "cartPage":{
+        "continueShopping":"#continue-shopping"
+    }
+}

@@ -1,10 +1,5 @@
 {
-    "login":{
-        "username":"#user-name",
-        "password":"#password",
-        "loginBtn":"#login-button"
-    },
-    "data":[
+    "valid_data":[
         {
             "loginUsername":"standard_user",
             "loginPass":"secret_sauce"
@@ -18,8 +13,14 @@
             "loginPass":"secret_sauce"
         }
     ],
-    "logout":{
-        "menuBtn":"#react-burger-menu-btn",
-        "logoutBtn":"#logout_sidebar_link"
-    }
+    "invalid_data":[
+        {
+            "loginUsername": "Kshitij",
+            "loginPass":"abcd123"
+        },
+        {
+            "loginUsername": "locked_out_user",
+            "loginPass": "secret_sauce"
+        }
+    ]
 }
