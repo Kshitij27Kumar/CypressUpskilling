@@ -22,7 +22,6 @@ describe("Testing Add and Remove Product Functionality",()=>{
         cy.wait(1000)
         cy.moveFromCartToProductPage(locator)
         cy.wait(1000)
-        cy.removeItem()
-        cy.verifyProduct(locator)
+        cy.removeItem(locator)
     })
 })

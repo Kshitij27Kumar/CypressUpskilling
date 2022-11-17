@@ -39,16 +39,31 @@ Cypress.Commands.add('checkInvalLogin',(locator)=>{
 //function to add product into cart
 Cypress.Commands.add('addProductToCart',(locator)=>{
     cy.get(locator.productPage.addToCartBtn).click()
+    cy.get(".inventory_item_name").eq(0).invoke('text').as('itemName1')
+    cy.get(".inventory_item_price").eq(0).invoke('text').as('itemCost1')
 })
 //function to verify added product
 Cypress.Commands.add('verifyProduct',(locator)=>{
     cy.get(locator.productPage.cartBtn).click()
+    cy.get('@itemName1').then((itemName)=>{
+        let Item_name=itemName
+        cy.contains(Item_name)
+    })
+    cy.get('@itemCost1').then((itemCost)=>{
+        let Item_cost=itemCost
+        cy.contains(Item_cost)
+    })
 })
 //function to move back to product page from cart
 Cypress.Commands.add('moveFromCartToProductPage',(locator)=>{
     cy.get(locator.cartPage.continueShopping).click()
 })
 //function to remove item from cart
-Cypress.Commands.add('removeItem',()=>{
-    cy.contains('Remove').click();
+Cypress.Commands.add('removeItem',(locator)=>{
+    cy.contains('Remove').should('be.visible').click()
+    cy.get(locator.productPage.cartBtn).click()
+    cy.get(locator.cartPage.cartList).should("not.have.class",locator.cartPage.cartItem)
 })
+
+
+//CORRECT THE LOCATOR FORMAT
