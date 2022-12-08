@@ -12,11 +12,15 @@
         "addToCartBtn":":nth-child(1) > .inventory_item_description > .pricebar > .btn",
         "cartBtn":".shopping_cart_link",
         "firstItem":"#item_4_title_link > div",
-        "firstItemPrice":"#inventory_container > div > div:nth-child(1) > div.inventory_item_description > div.pricebar > div"
+        "firstItemPrice":"#inventory_container > div > div:nth-child(1) > div.inventory_item_description > div.pricebar > div",
+        "productName":".inventory_item_name",
+        "productPrice":".inventory_item_price"
     },
     "cartPage":{
         "continueShopping":"#continue-shopping",
         "cartList":".cart_list",
-        "cartItem":"cart_item"
+        "cartItem":"cart_item",
+        "cartItemName":".inventory_item_name",
+        "cartItemPrice":".inventory_item_price"
     }
 }

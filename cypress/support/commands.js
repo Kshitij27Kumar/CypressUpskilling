@@ -65,5 +65,74 @@ Cypress.Commands.add('removeItem',(locator)=>{
     cy.get(locator.cartPage.cartList).should("not.have.class",locator.cartPage.cartItem)
 })
 
-
-//CORRECT THE LOCATOR FORMAT
+//COMMANDS FOR SPICE JET
+//prints runtime error
+Cypress.on('uncaught:exception', (err) => {
+    console.log(err);
+    return false;
+})
+//command to open and validate url of Spice Jet
+Cypress.Commands.add('openSpiceJet',()=>{
+    cy.visit('https://www.spicejet.com/')
+    cy.url().should('eq','https://www.spicejet.com/')
+})
+//command to select city
+Cypress.Commands.add('selectLocation',(locator,shortName,fullName,wayOfTravel)=>{
+    if(!wayOfTravel)
+        cy.get(locator).type(shortName)
+    else
+        cy.get(locator).eq(1).type(shortName)
+    cy.wait(5000)
+    cy.contains(fullName).click();
+})
+//commad to select travel dates
+Cypress.Commands.add('selectTravelDate',(day,month,year,locator)=>{
+    cy.wait(2000)
+    let monthYear=`div[data-testid="undefined-month-`+(`${month}`)+`-`+(`${year}`)+`"]`
+    cy.get(monthYear).eq(0)
+    .find(locator.travelDetails.date).children().children().children().contains(`${day}`).click()
+})
+//command to select number of passengers
+Cypress.Commands.add('numberOfPassengers',(locator,addPassenger,number)=>{
+    while(number>0)
+    {
+        cy.get(locator.travelDetails.passengersBtn).click()
+        cy.get(addPassenger).click()
+        cy.get(locator.travelDetails.passengersBtn).click()
+        number--
+    }
+})
+//command to select currency
+Cypress.Commands.add('selectCurrency',(travelData)=>{
+    cy.contains("INR").click();
+    cy.get(".css-1dbjc4n").each(($ele) => {
+    if ($ele.text() == travelData.travelFormData[0].currency) {
+        cy.wrap($ele).click()
+    }
+})
+})
+//verify data
+Cypress.Commands.add('verifyDetails',(locator,travelData,departureDate,returnDate,tripType)=>{
+    cy.wait(2000)
+    cy.get(locator.flightsPage.travelDetails).should('contain',(`${travelData.travelFormData[0].fromCityFullName}`+" to "+`${travelData.travelFormData[0].toCityFullName}`))
+    cy.get(locator.flightsPage.travelDetails).should('contain',(`${departureDate}`))
+    if(tripType==2)
+        cy.get(locator.flightsPage.returnDate).should('contain',(`${returnDate}`))
+    cy.get(locator.flightsPage.passengerDetails).should('contain',(`${travelData.travelFormData[0].adults}`+" Adults "+`${travelData.travelFormData[0].children}`+" Child  "+`${travelData.travelFormData[0].infants}`+" Infants"))
+})
+//count number of avaiable flights
+Cypress.Commands.add('countFlights',(locator,travelData, tripType)=>{
+    cy.get(locator.flightsPage.departureFlights).children(locator.flightsPage.flightListContainer)
+    .find(locator.flightsPage.flightListDiv).then(listing => {
+        const count = Cypress.$(listing).length;
+        cy.log("Number of departure flights to "+ " "+(`${travelData.travelFormData[0].toCityFullName}`)+" = "+count)
+    })  
+    if(tripType==2)
+    {
+        cy.get(locator.flightsPage.returnFlights).children(locator.flightsPage.flightListContainer)
+        .find(locator.flightsPage.flightListDiv).then(listing => {
+            const count = Cypress.$(listing).length;
+            cy.log("Number of returning flights to "+ " "+(`${travelData.travelFormData[0].fromCityFullName}`)+" = "+count)
+        })  
+    }     
+})

@@ -1,0 +1,15 @@
+{
+    "travelFormData":[
+        {
+            "fromCityShortName":"De",
+            "fromCityFullName":"Delhi",
+            "toCityShortName":"Mu",
+            "toCityFullName":"Mumbai",
+            "adults":2,
+            "infants":2,
+            "children":1,
+            "currency":"USD",
+            "passengerType":"Family & Friends"
+        }
+    ]
+}

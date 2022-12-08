@@ -1,0 +1,25 @@
+{
+    "travelDetails":{
+        "oneWay":"div[data-testid='one-way-radio-button']",
+        "roundTrip":"div[data-testid='round-trip-radio-button']",
+        "fromCity":"input[value='Delhi (DEL)']",
+        "toCity":"input[type='text']",
+        "departureDateDropDown":"div[data-testid='departure-date-dropdown-label-test-id']",
+        "date":".css-1dbjc4n>.css-1dbjc4n.r-6koalj.r-18u37iz.r-d0pm55",
+        "returnDateDropDown":"div[data-testid='return-date-dropdown-label-test-id']",
+        "passengersBtn":"div[data-testid='home-page-travellers']",
+        "addAdults":"div[data-testid='Adult-testID-plus-one-cta']",
+        "addChildren":"div[data-testid='Children-testID-plus-one-cta']",
+        "addInfants":"div[data-testid='Infant-testID-plus-one-cta']",
+        "searchFlight":"div[data-testid='home-page-flight-cta']"
+    },
+    "flightsPage":{
+        "travelDetails":"span[class='css-76zvg2 css-16my406 r-homxoj r-1s6pnzw r-1iadsmv']",
+        "passengerDetails":"span[class='css-76zvg2 css-16my406 r-homxoj r-7o8qx1 r-1s6pnzw r-ge9izo']",
+        "returnDate":"span[class='css-76zvg2 css-16my406 r-homxoj r-1s6pnzw r-ge9izo']",
+        "departureFlights":"div[id='list-results-section-0']",
+        "returnFlights":"div[id='list-results-section-1']",
+        "flightListContiner":"div[class='css-1dbjc4n r-1xdf14d']",
+        "flightListDiv":"div[class='css-1dbjc4n r-14lw9ot r-3aj1re r-18u37iz']"
+    }
+}
