@@ -136,3 +136,106 @@ Cypress.Commands.add('countFlights',(locator,travelData, tripType)=>{
         })  
     }     
 })
+
+
+//Commands for AUTOMATION EXERCISE
+
+//Command to open automation exercise website and verify url
+Cypress.Commands.add('openAutomationExercise',()=>{
+    cy.visit('https://automationexercise.com/')
+    cy.url().should('eq','https://automationexercise.com/')
+})
+
+//Command to open signup/login page
+Cypress.Commands.add('openSignupLoginPage',(locator)=>{
+    cy.get(locator.homepage.signuploginbtn).click()
+})
+
+Cypress.Commands.add('verifyText',(locator,text,textid)=>{
+    if(textid==1)
+        cy.get(locator).children().children().children().eq(2).children().children().eq(0).should('have.text',text)
+    else if(textid==2)
+        cy.get(locator).children().children().children().children().eq(0).children().eq(0).should('have.text',text)
+    else if(textid==3)
+        cy.get(locator).children().children().children().children().eq(0).should('have.text',text)
+    else if(textid==4)
+        cy.get(locator).children().children().children().children().eq(1).children().children().children().eq(9).children().children().should('have.text',text)
+    else if(textid==5)
+        cy.get(locator).children().children().children().children().eq(0).children().should('have.text',text)
+    else if(textid==6)
+        cy.get(locator).children().children().children().eq(0).children().children().eq(0).should('have.text',text)
+    else if(textid==7)
+        cy.get(locator).next().should("have.text",text)
+    else if(textid==8)
+        cy.get(locator).prev().should("have.text",text)
+})
+
+// Cypress.Commands.add('verifyTextAccountInformationText',(locator,text)=>{
+
+// })
+
+// Cypress.Commands.add('generateEmail',(email)=>{
+//     var strValues="abcdefghijklmnopqrstuvwxyz0123456789"
+//     var strTmp 
+//     for (var i=0;i<10;i++) { 
+//     strTmp = strValues.charAt(Math.round(strValues.length*Math.random())); 
+//     email = email + strTmp; 
+//     } 
+//     strTmp = ""; 
+//     email = email + "@"; 
+//     for (var j=0;j<8;j++) { 
+//     strTmp = strValues.charAt(Math.round(strValues.length*Math.random())); 
+//     email = email + strTmp; 
+//     } 
+//     email = email + ".com" 
+//     return email; 
+// })
+
+// Cypress.Commands.add('generatePassword',(pass)=>{
+//     var str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' + 
+//                     'abcdefghijklmnopqrstuvwxyz0123456789@#$';
+              
+//             for (let i = 1; i <= 8; i++) {
+//                 var char = Math.floor(Math.random()
+//                             * str.length + 1);
+                  
+//                 pass += str.charAt(char)
+//             }
+              
+//     return pass;
+// })
+
+Cypress.Commands.add('fillSignUpForm',(locator,data,email)=>{
+    cy.get(locator.signup_login.name).type(data.signup_data[0].username)
+    cy.get(locator.signup_login.email).type(email)
+    cy.get(locator.signup_login.submit).click()
+})
+
+Cypress.Commands.add('fillAccountInformation',(locator,data,pass)=>{
+    cy.get(locator.signup_login.title).click()
+    cy.get(locator.signup_login.password).type(pass)
+    // cy.get(locator.signup_login.day).click()
+    // cy.get("#days").each(($ele) => {
+    //     if ($ele.text() == data.signup_data[0].day) {
+    //         cy.wrap($ele).click()
+    //     }
+    // })    
+    // // cy.get(locator.signup_login.month).click()
+    // // cy.contains(data.signup_data[0].month).click()
+    // // cy.get(locator.signup_login.year).click()
+    // // cy.contains(data.signup_data[0].year).click()
+    cy.get(locator.signup_login.firstname).type(data.signup_data[0].firstname)
+    cy.get(locator.signup_login.lastname).type(data.signup_data[0].lastname)
+    cy.get(locator.signup_login.company).type(data.signup_data[0].company)
+    cy.get(locator.signup_login.address).type(data.signup_data[0].address)
+    cy.get(locator.signup_login.state).type(data.signup_data[0].state)
+    cy.get(locator.signup_login.city).type(data.signup_data[0].city)
+    cy.get(locator.signup_login.zipcode).type(data.signup_data[0].zipcode)
+    cy.get(locator.signup_login.mobilenumber).type(data.signup_data[0].mobilenumber)
+})
+
+Cypress.Commands.add('fillLoginForm',(locator,email,pass)=>{
+    cy.get(locator.signup_login.loginemail).type(email)
+    cy.get(locator.signup_login.loginpassword).type(pass)
+    cy.get(locator.signup_login.loginbtn).click()
+})
