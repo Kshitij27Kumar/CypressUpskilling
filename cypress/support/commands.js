@@ -179,6 +179,9 @@ Cypress.Commands.add('fillSignUpForm',(locator,data,email)=>{
 Cypress.Commands.add('fillAccountInformation',(locator,data,pass)=>{
     cy.get(locator.signup_login.title).click()
     cy.get(locator.signup_login.password).type(pass)
+    cy.get(locator.signup_login.day).children().select(data.signup_data[0].day)
+    cy.get(locator.signup_login.month).children().select(data.signup_data[0].month)
+    cy.get(locator.signup_login.year).children().select(data.signup_data[0].year)
     cy.get(locator.signup_login.firstname).type(data.signup_data[0].firstname)
     cy.get(locator.signup_login.lastname).type(data.signup_data[0].lastname)
     cy.get(locator.signup_login.company).type(data.signup_data[0].company)
