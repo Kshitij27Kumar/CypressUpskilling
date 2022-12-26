@@ -12,93 +12,78 @@ describe('Testing Automation Exercise Website',()=>{
         }) 
     })
     beforeEach(()=>{
-        cy.openSignupLoginPage(locator)
-        cy.verifyText(locator.signup_login.signupform,"New User Signup!",1)
-        email=''
-        var strValues="abcdefghijklmnopqrstuvwxyz0123456789"
-        var strTmp 
-        for (var i=0;i<10;i++) { 
-        strTmp = strValues.charAt(Math.round(strValues.length*Math.random())); 
-        email = email + strTmp; 
-        } 
-        strTmp = ""; 
-        email = email + "@"; 
-        for (var j=0;j<8;j++) { 
-        strTmp = strValues.charAt(Math.round(strValues.length*Math.random())); 
-        email = email + strTmp; 
-        } 
-        email = email + ".com" 
+        cy.get(locator.homepage.signup_loginbtn).click()
+        cy.verifyText("New User Signup!")
+        var num = Math.floor(1000 + Math.random() * 9000);
+        email="Kshitij"+num+"@gmail.com"
         pass=''
-        var str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' + 
-                    'abcdefghijklmnopqrstuvwxyz0123456789@#$';
-              
-            for (let i = 1; i <= 8; i++) {
-                var char = Math.floor(Math.random()
-                            * str.length + 1);
-                  
-                pass += str.charAt(char)
-            }
-        cy.openSignupLoginPage(locator)
+        var str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' + 'abcdefghijklmnopqrstuvwxyz0123456789@#$';
+        for(let i = 1; i <= 8; i++) {
+            var char = Math.floor(Math.random()* str.length + 1)
+            pass += str.charAt(char)
+        }
+        cy.get(locator.homepage.signup_loginbtn).click()
         cy.fillSignUpForm(locator,data,email)
-        cy.verifyText(locator.signup_login.accountinfotext,"Enter Account Information",2)
-        cy.fillAccountInformation(locator,data,pass)
+        cy.verifyText("Enter Account Information")
+        cy.get(locator.signup_login.title).click()
+        cy.get(locator.signup_login.password).type(pass)
+        cy.fillDateOfBirth(data.dateofbirth)
+        cy.fillPersonalDetails(data.personal_details)
         cy.get(locator.signup_login.createaccount).click()
     })
     it("Register User",()=>{
-        cy.verifyText(locator.signup_login.accountcreated,"Account Created!",3)
+        cy.verifyText("Account Created!")
         cy.get(locator.signup_login.continue).click()
-        cy.verifyText(locator.homepage.loggedinasusername,data.signup_data[0].username,4)
+        cy.verifyText(' Logged in as '+data.signup_data[0].username)
         cy.contains("Delete Account").click()
-        cy.verifyText(locator.homepage.accountdeleted,"Account Deleted!",5)
+        cy.verifyText("Account Deleted!")
         cy.get(locator.homepage.continue).click()
     })
     it("Login with correct credentials",()=>{
         cy.get(locator.signup_login.continue).click()
         cy.get(locator.homepage.logoutbtn).click()
         cy.openAutomationExercise()
-        cy.openSignupLoginPage(locator)
-        cy.verifyText(locator.signup_login.loginform,"Login to your account",6)
+        cy.get(locator.homepage.signup_loginbtn).click()
+        cy.verifyText("Login to your account")
         cy.fillLoginForm(locator,email,pass)
-        cy.verifyText(locator.homepage.loggedinasusername,data.signup_data[0].username,4)
+        cy.verifyText(' Logged in as '+data.signup_data[0].username)
         cy.contains("Delete Account").click()
-        cy.verifyText(locator.homepage.accountdeleted,"Account Deleted!",5)
+        cy.verifyText("Account Deleted!")
     })
     it("Login with incorrect credentials",()=>{
         cy.get(locator.signup_login.continue).click()
         cy.get(locator.homepage.logoutbtn).click()
         cy.openAutomationExercise()
-        cy.openSignupLoginPage(locator)
-        cy.verifyText(locator.signup_login.loginform,"Login to your account",6)
-        var pass=''
-        var str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' + 
-                    'abcdefghijklmnopqrstuvwxyz0123456789@#$';
-              
-            for (let i = 1; i <= 8; i++) {
-                var char = Math.floor(Math.random()
-                            * str.length + 1);
-                  
-                pass += str.charAt(char)
-            }
+        cy.get(locator.homepage.signup_loginbtn).click()
+        cy.verifyText("Login to your account")
+        var num = Math.floor(1000 + Math.random() * 9000);
+        email="Kshitij"+num+"@gmail.com"
+        pass=''
+        var str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' + 'abcdefghijklmnopqrstuvwxyz0123456789@#$';
+        for(let i = 1; i <= 8; i++) {
+            var char = Math.floor(Math.random()* str.length + 1)
+            pass += str.charAt(char)
+        }
         cy.fillLoginForm(locator,email,pass)
-        cy.verifyText(locator.signup_login.loginpassword,"Your email or password is incorrect!",7)
+        cy.verifyText("Your email or password is incorrect!")
     })
     it("Logout User",()=>{
         cy.get(locator.signup_login.continue).click()
         cy.get(locator.homepage.logoutbtn).click()
         cy.openAutomationExercise()
-        cy.openSignupLoginPage(locator)
-        cy.verifyText(locator.signup_login.loginform,"Login to your account",6)
+        cy.get(locator.homepage.signup_loginbtn).click()
+        cy.verifyText("Login to your account")
         cy.fillLoginForm(locator,email,pass)
-        cy.verifyText(locator.homepage.loggedinasusername,data.signup_data[0].username,4)
+        cy.verifyText(' Logged in as '+data.signup_data[0].username)
         cy.get(locator.homepage.logoutbtn).click()
         cy.url().should('eq','https://automationexercise.com/login')
     })
     it("Register User with existing email",()=>{
-        cy.verifyText(locator.signup_login.accountcreated,"Account Created!",3)
+        cy.verifyText("Account Created!")
         cy.get(locator.signup_login.continue).click()
-        cy.verifyText(locator.homepage.loggedinasusername,data.signup_data[0].username,4)
+        cy.verifyText(' Logged in as '+data.signup_data[0].username)
         cy.get(locator.homepage.logoutbtn).click()
         cy.fillSignUpForm(locator,data,email)
-        cy.verifyText(locator.signup_login.submit,'Email Address already exist!',8)
+        cy.verifyText('Email Address already exist!')
     })
 })

@@ -145,29 +145,9 @@ Cypress.Commands.add('openAutomationExercise',()=>{
     cy.visit('https://automationexercise.com/')
     cy.url().should('eq','https://automationexercise.com/')
 })
-
-//Command to open signup/login page
-Cypress.Commands.add('openSignupLoginPage',(locator)=>{
-    cy.get(locator.homepage.signuploginbtn).click()
-})
 //Command to verify different texts
-Cypress.Commands.add('verifyText',(locator,text,textid)=>{
-    if(textid==1)
-        cy.get(locator).children().children().children().eq(2).children().children().eq(0).should('have.text',text)
-    else if(textid==2)
-        cy.get(locator).children().children().children().children().eq(0).children().eq(0).should('have.text',text)
-    else if(textid==3)
-        cy.get(locator).children().children().children().children().eq(0).should('have.text',text)
-    else if(textid==4)
-        cy.get(locator).children().children().children().children().eq(1).children().children().children().eq(9).children().children().should('have.text',text)
-    else if(textid==5)
-        cy.get(locator).children().children().children().children().eq(0).children().should('have.text',text)
-    else if(textid==6)
-        cy.get(locator).children().children().children().eq(0).children().children().eq(0).should('have.text',text)
-    else if(textid==7)
-        cy.get(locator).next().should("have.text",text)
-    else if(textid==8)
-        cy.get(locator).prev().should("have.text",text)
+Cypress.Commands.add('verifyText',(text)=>{
+    cy.contains(text).should('have.text',text)
 })
 //Command to fill sign up form
 Cypress.Commands.add('fillSignUpForm',(locator,data,email)=>{
@@ -175,23 +155,18 @@ Cypress.Commands.add('fillSignUpForm',(locator,data,email)=>{
     cy.get(locator.signup_login.email).type(email)
     cy.get(locator.signup_login.submit).click()
 })
-//Command to fill account information
-Cypress.Commands.add('fillAccountInformation',(locator,data,pass)=>{
-    cy.get(locator.signup_login.title).click()
-    cy.get(locator.signup_login.password).type(pass)
-    cy.get(locator.signup_login.day).children().select(data.signup_data[0].day)
-    cy.get(locator.signup_login.month).children().select(data.signup_data[0].month)
-    cy.get(locator.signup_login.year).children().select(data.signup_data[0].year)
-    cy.get(locator.signup_login.firstname).type(data.signup_data[0].firstname)
-    cy.get(locator.signup_login.lastname).type(data.signup_data[0].lastname)
-    cy.get(locator.signup_login.company).type(data.signup_data[0].company)
-    cy.get(locator.signup_login.address).type(data.signup_data[0].address)
-    cy.get(locator.signup_login.state).type(data.signup_data[0].state)
-    cy.get(locator.signup_login.city).type(data.signup_data[0].city)
-    cy.get(locator.signup_login.zipcode).type(data.signup_data[0].zipcode)
-    cy.get(locator.signup_login.mobilenumber).type(data.signup_data[0].mobilenumber)
+//Command to fill date of birth
+Cypress.Commands.add('fillDateOfBirth',(data)=>{
+    for(let key in data){
+        cy.get(`[id="${key}"]`).children().select(data[key])
+    }
 })
-
+//Command to fill personal details
+Cypress.Commands.add('fillPersonalDetails',(data)=>{
+    for(let key in data){
+        cy.get(`input[id="${key}"]`).type(data[key])
+    }
+}) 
 //Command to fill login form
 Cypress.Commands.add('fillLoginForm',(locator,email,pass)=>{
     cy.get(locator.signup_login.loginemail).type(email)

@@ -1,19 +1,22 @@
 {
     "signup_data":[
         {
-            "username":"Kshitij2703",
-            "day":27,
-            "month":"March",
-            "year":"2001",
-            "firstname":"Kshitij",
-            "lastname":"Kumar",
-            "company":"3Pillar Global",
-            "address":"Sector 62, Noida, UP",
-            "country":"India",
-            "state":"Madhya Pradesh",
-            "city":"Satna",
-            "zipcode":"485001",
-            "mobilenumber":"8529190627"
+            "username":"Kshitij2703"
         }
-    ]
+    ],
+    "dateofbirth":{
+        "uniform-days":27,
+        "uniform-months":"March",
+        "uniform-years":"2001"
+    },
+    "personal_details":{
+        "first_name":"Kshitij",
+        "last_name":"Kumar",
+        "company":"3Pillar Global",
+        "address1":"Sector 62, Noida, UP",
+        "state":"Madhya Pradesh",
+        "city":"Satna",
+        "zipcode":"485001",
+        "mobile_number":"8529190627"
+    }
 }
