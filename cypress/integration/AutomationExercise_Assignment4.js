@@ -2,7 +2,7 @@
 describe('Testing Automation Exercise Website',()=>{
     let locator, data
     var email, pass
-    beforeEach(()=>{
+    before(()=>{
         cy.openAutomationExercise()
         cy.fixture("locatorsAutomationExercise.json").then((locators)=>{
             locator=locators
@@ -10,7 +10,8 @@ describe('Testing Automation Exercise Website',()=>{
         cy.fixture("dataAutomationExercise.json").then((details)=>{
             data=details
         }) 
-    })
+    }) 
+    // We need to create new user account every time because after some test cases we have to delete the account as per the given requirements
     beforeEach(()=>{
         cy.get(locator.homepage.signup_loginbtn).click()
         cy.verifyText("New User Signup!")
@@ -56,14 +57,8 @@ describe('Testing Automation Exercise Website',()=>{
         cy.openAutomationExercise()
         cy.get(locator.homepage.signup_loginbtn).click()
         cy.verifyText("Login to your account")
-        var num = Math.floor(1000 + Math.random() * 9000);
-        email="Kshitij"+num+"@gmail.com"
-        pass=''
-        var str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' + 'abcdefghijklmnopqrstuvwxyz0123456789@#$';
-        for(let i = 1; i <= 8; i++) {
-            var char = Math.floor(Math.random()* str.length + 1)
-            pass += str.charAt(char)
-        }
+        email="a"+email
+        pass=pass+'1'
         cy.fillLoginForm(locator,email,pass)
         cy.verifyText("Your email or password is incorrect!")
     })
